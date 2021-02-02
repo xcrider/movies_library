@@ -12,7 +12,7 @@ class Movie:
         self.counter = 0
 
     def __str__(self):
-        return f"{self.title} ({self.year})" #Pulp Fiction (1994)
+        return f"{self.title} ({self.year})"
 
     def _repr__(self):
         return f"Movie {self.title}, {self.year}, {self.genre}, {self.counter}"
@@ -30,10 +30,10 @@ class Series(Movie):
         self.episode = episode
 
     def __str__(self):
-        return f"{self.title} S{self.season:02d}E{self.episode:02d}" #The Simpsons S01E05
+        return f"{self.title} S{self.season:02d}E{self.episode:02d}"
 
     def _repr__(self):
-        return f"Serires {self.title}, {self.year}, {self.genre}, {self.counter}"
+        return f"Series {self.title}, {self.year}, {self.genre}, {self.counter}"
 
 
 def new_movie():
@@ -43,20 +43,39 @@ def new_movie():
     genre = input("Genre: ")
     new_movie = Movie(title, year, genre)
     library.append(new_movie)
+    print("New movie added!")
 
 
 def new_series():
 
-    title = input("Movie title: ")
+    title = input("Series title: ")
     year = input("Year: ")
     genre = input("Genre: ")
-    season = int(input("Season: "))
-    episode = int(input("Episode: "))
+    season = input("Season: ")
+    episode = input("Episode: ")
     new_series = Series(title, year, genre, season, episode)
     library.append(new_series)
+    print("New series added!")
+
+
+def show_library():
+
+    for i, title in enumerate(library):
+            print(f"{i}) {title}")
 
 
 if __name__ == "__main__":
 
-    series = Series(episode=1, season=1, title = "Lupin", year = 1982, genre="Action")
-    movie = Movie(title = "Pulp Fiction", year= 1994, genre="Action")
+    movie1 = Movie(title = "Gra", year=1990, genre = "Dramat")
+    movie2 = Movie(title = "Zielona Mila", year= 1990, genre = "Dramat")
+    movie3 = Movie(title = "Skazani na Showshank", year=1999, genre = "Dramat")
+
+    series1 = Series(title = "Breaking Bad", year=2016, genre = "Dramat", episode=12, season=6)
+    series2 = Series(title = "The Crown", year=2019, genre = "Dramat", episode=12, season=3)
+    series3 = Series(title = "Lupin", year=2020, genre = "Dramat", episode=10, season=1)
+
+    library = [movie1, series1, movie2, series2, movie3, series3]
+
+    show_library()
+    new_series()
+    show_library()
