@@ -103,6 +103,24 @@ def generate_views():
     print(f"Added {y} in total of {x.counter} views")
 
 
+def start_off(generator):
+
+    for i in range(0, generator):
+
+        generate_views()
+        i += 1
+
+
+def top_titles(top_items):
+
+    top_list = sorted(library, key=lambda item: item.counter, reverse=True)
+
+    print("Top list:")
+
+    for i in range(0, top_items):
+       print(top_list[i])
+
+
 if __name__ == "__main__":
 
     print("Movies library")
@@ -117,10 +135,6 @@ if __name__ == "__main__":
 
     library = [movie1, series1, movie2, series2, movie3, series3]
 
-    search("Lupin")
-    generate_views()
-    generate_views()
-    generate_views()
-    generate_views()
-    generate_views()
+    start_off(10)
     get_library()
+    top_titles(3)
