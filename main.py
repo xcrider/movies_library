@@ -58,10 +58,37 @@ def new_series():
     print("New series added!")
 
 
-def show_library():
+def get_library():
 
     for i, title in enumerate(library):
             print(f"{i}) {title}")
+
+
+def get_movies():
+
+    movies_libary = []
+    for title in library:
+        if isinstance(title, Series):
+            continue
+        else:
+            movies_libary.append(title)
+
+    movies_libary = sorted(movies_libary, key=lambda movie: movie.title)
+    print("Movies in alphabetic order: ")
+    for movie in movies_libary:
+        print(movie)
+
+
+def search(search_title):
+
+    print("Searching…")
+    for movie in library:
+        if movie.title == search_title:
+            print(f" Here it is: {movie}")
+            break
+    else:
+        print("Ooops… we don't have that one in library. Here's a full list of our movies")
+        get_library()
 
 
 if __name__ == "__main__":
@@ -76,6 +103,4 @@ if __name__ == "__main__":
 
     library = [movie1, series1, movie2, series2, movie3, series3]
 
-    show_library()
-    new_series()
-    show_library()
+    search("Lupin")
