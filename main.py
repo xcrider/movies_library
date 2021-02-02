@@ -1,3 +1,5 @@
+import random
+
 library = []
 
 
@@ -12,7 +14,7 @@ class Movie:
         self.counter = 0
 
     def __str__(self):
-        return f"{self.title} ({self.year})"
+        return f"{self.title} ({self.year}) {self.counter}"
 
     def _repr__(self):
         return f"Movie {self.title}, {self.year}, {self.genre}, {self.counter}"
@@ -30,7 +32,7 @@ class Series(Movie):
         self.episode = episode
 
     def __str__(self):
-        return f"{self.title} S{self.season:02d}E{self.episode:02d}"
+        return f"{self.title} S{self.season:02d}E{self.episode:02d} {self.counter}"
 
     def _repr__(self):
         return f"Series {self.title}, {self.year}, {self.genre}, {self.counter}"
@@ -84,14 +86,26 @@ def search(search_title):
     print("Searching…")
     for movie in library:
         if movie.title == search_title:
-            print(f" Here it is: {movie}")
+            print(f"Here it is: {movie}")
             break
     else:
-        print("Ooops… we don't have that one in library. Here's a full list of our movies")
+        print("Oops… we don't have that one in library. Here's a full list of available titles: ")
         get_library()
 
 
+def generate_views():
+
+    print("Generating views for: ")
+    x = random.choice(library)
+    print(x)
+    y = random.randint(1, 100)
+    x.counter += y
+    print(f"Added {y} in total of {x.counter} views")
+
+
 if __name__ == "__main__":
+
+    print("Movies library")
 
     movie1 = Movie(title = "Gra", year=1990, genre = "Dramat")
     movie2 = Movie(title = "Zielona Mila", year= 1990, genre = "Dramat")
@@ -104,3 +118,9 @@ if __name__ == "__main__":
     library = [movie1, series1, movie2, series2, movie3, series3]
 
     search("Lupin")
+    generate_views()
+    generate_views()
+    generate_views()
+    generate_views()
+    generate_views()
+    get_library()
