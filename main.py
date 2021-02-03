@@ -20,6 +20,9 @@ class Movie:
         return f"Movie {self.title}, {self.year}, {self.genre}, {self.counter}"
 
     def play(self):
+
+        '''Method increases the title play counter.'''
+
         print(f"Playing {self.title}")
         self.counter += 1
 
@@ -40,6 +43,8 @@ class Series(Movie):
 
 def new_movie():
 
+    '''Function createns new movie and adds it to library.'''
+
     title = input("Movie title: ")
     year = input("Year: ")
     genre = input("Genre: ")
@@ -50,23 +55,33 @@ def new_movie():
 
 def new_series():
 
+    '''Function createns new movie and adds it to library.'''
+
     title = input("Series title: ")
     year = input("Year: ")
     genre = input("Genre: ")
-    season = input("Season: ")
-    episode = input("Episode: ")
-    new_series = Series(title, year, genre, season, episode)
-    library.append(new_series)
-    print("New series added!")
+    seasons = int(input("Season: "))
+    episodes = 0
+    for i in range(1, seasons+1):
+        episodes  = input(f"How many episodes is in {i} season?")
+        for episode in episodes:
+            new_series = Series(title, year, genre, i, episode)
+            library.append(new_series)
+
+    print(f"New series with {seasons} added!")
 
 
 def get_library():
 
+    '''Shows all title in library'''
+
     for i, title in enumerate(library):
-            print(f"{i}) {title}")
+        print(f"{i}) {title}")
 
 
 def get_movies():
+
+    '''Shows all movies from the library'''
 
     movies_libary = []
     for title in library:
@@ -83,6 +98,8 @@ def get_movies():
 
 def search(search_title):
 
+    '''Checks if the search title is availablein library'''
+
     print("Searching…")
     for movie in library:
         if movie.title == search_title:
@@ -94,6 +111,8 @@ def search(search_title):
 
 
 def generate_views():
+
+    '''Bulk views generator for random titles in library'''
 
     print("Generating views for: ")
     x = random.choice(library)
@@ -108,10 +127,11 @@ def start_off(generator):
     for i in range(0, generator):
 
         generate_views()
-        i += 1
 
 
 def top_titles(top_items):
+
+    '''Shows top titles by number of plays - uses counter variable. '''
 
     top_list = sorted(library, key=lambda item: item.counter, reverse=True)
 
@@ -138,3 +158,5 @@ if __name__ == "__main__":
     start_off(10)
     get_library()
     top_titles(3)
+    new_series()
+    get_library()
