@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 library = []
 
@@ -138,10 +139,10 @@ def top_titles(top_items):
 
     '''Shows top titles by number of plays - uses counter variable. '''
 
+    now = datetime.today().strftime('%d-%m-%Y')
+    print(f"Najpopularniejsze filmy i seriale dnia {now}")
+
     top_list = sorted(library, key=lambda item: item.counter, reverse=True)
-
-    print("Top list:")
-
     for i in range(0, top_items):
        print(top_list[i])
 
@@ -164,7 +165,7 @@ if __name__ == "__main__":
     get_library()
     top_titles(3)
     search("The Crown")
-    print("MOVIES")
+    print("MOVIES:")
     get_movies()
-    print("SERIES")
+    print("SERIES:")
     get_series()
