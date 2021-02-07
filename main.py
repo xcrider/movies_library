@@ -61,10 +61,9 @@ def new_series():
     year = input("Year: ")
     genre = input("Genre: ")
     seasons = int(input("Season: "))
-    episodes = 0
     for i in range(1, seasons+1):
-        episodes  = input(f"How many episodes is in {i} season?")
-        for episode in episodes:
+        episodes = int(input(f"How many episodes is in {i} season?"))
+        for episode in range(episodes):
             new_series = Series(title, year, genre, i, episode)
             library.append(new_series)
 
@@ -82,17 +81,24 @@ def get_library():
 def get_movies():
 
     '''Shows all movies from the library'''
-
     movies_libary = []
-    for title in library:
-        if isinstance(title, Series):
-            continue
-        else:
-            movies_libary.append(title)
+    movies_libary = [x for x in library if not isinstance(x, Series)]
 
     movies_libary = sorted(movies_libary, key=lambda movie: movie.title)
     print("Movies in alphabetic order: ")
     for movie in movies_libary:
+        print(movie)
+
+
+def get_series():
+
+    '''Shows all series in library'''
+
+    series_library = [x for x in library if isinstance(x, Series)]
+
+    series_library = sorted(series_library, key=lambda movie: movie.title)
+    print("Movies in alphabetic order: ")
+    for movie in series_library:
         print(movie)
 
 
@@ -101,13 +107,12 @@ def search(search_title):
     '''Checks if the search title is availablein library'''
 
     print("Searching…")
-    for movie in library:
-        if movie.title == search_title:
-            print(f"Here it is: {movie}")
-            break
-    else:
+    try:
+        searched_element = [x for x in library if x.title == search_title]
+        print(f"Here it is: {searched_element}")
+        return(searched_element)
+    except IndexError:
         print("Oops… we don't have that one in library. Here's a full list of available titles: ")
-        get_library()
 
 
 def generate_views():
@@ -158,5 +163,8 @@ if __name__ == "__main__":
     start_off(10)
     get_library()
     top_titles(3)
-    new_series()
-    get_library()
+    search("The Crown")
+    print("MOVIES")
+    get_movies()
+    print("SERIES")
+    get_series()
