@@ -82,7 +82,7 @@ def get_library():
 def get_movies():
 
     '''Shows all movies from the library'''
-    movies_libary = []
+
     movies_libary = [x for x in library if not isinstance(x, Series)]
 
     movies_libary = sorted(movies_libary, key=lambda movie: movie.title)
@@ -109,7 +109,7 @@ def search(search_title):
 
     print("Searching…")
     try:
-        searched_element = [x for x in library if x.title == search_title]
+        searched_element = [x for x in library if x.title == search_title][0]
         print(f"Here it is: {searched_element}")
         return(searched_element)
     except IndexError:
@@ -131,7 +131,6 @@ def generate_views():
 def start_off(generator):
 
     for i in range(0, generator):
-
         generate_views()
 
 
@@ -164,8 +163,9 @@ if __name__ == "__main__":
     start_off(10)
     get_library()
     top_titles(3)
-    search("The Crown")
+    
     print("MOVIES:")
     get_movies()
     print("SERIES:")
     get_series()
+    search("The Crown")
